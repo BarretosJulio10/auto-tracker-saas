@@ -57,13 +57,11 @@ const AdminMapView: React.FC = () => {
         <p className="text-sm text-muted-foreground">Visualize a localização de todos os dispositivos</p>
       </div>
       
-      <div className="flex-1">
+      <div className="flex-1" style={{ height: 'calc(100% - 80px)' }}>
         <LeafletMapWrapper center={centerPosition} zoom={4} className="h-full w-full">
           <TileLayer
-            {...{
-              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-              url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            } as any}
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
           {devices.map(device => (

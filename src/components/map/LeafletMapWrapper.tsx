@@ -32,15 +32,12 @@ const LeafletMapWrapper: React.FC<LeafletMapWrapperProps> = ({
   className = 'h-full w-full'
 }) => {
   return (
-    <div className={className}>
+    <div className={className} style={{ height: '100%', width: '100%' }}>
       <MapContainer 
         className="h-full w-full"
-        // Use spread operator with type assertion to fix TypeScript error
-        {...{
-          center,
-          zoom,
-          style: { height: '100%', width: '100%' }
-        } as any}
+        center={center as any}
+        zoom={zoom as any}
+        style={{ height: '100%', width: '100%' }}
       >
         <MapController center={center} zoom={zoom} />
         {children}
