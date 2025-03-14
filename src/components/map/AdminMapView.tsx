@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Icon } from 'leaflet';
+import { Icon, LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // Correção para os ícones do Leaflet no React
@@ -45,6 +45,9 @@ const AdminMapView: React.FC = () => {
     }
   };
 
+  // Define center as LatLngExpression to fix type issues
+  const centerPosition: LatLngExpression = [-15.7801, -47.9292];
+
   return (
     <div className="h-full w-full flex flex-col">
       <div className="p-4 bg-white border-b">
@@ -54,7 +57,7 @@ const AdminMapView: React.FC = () => {
       
       <div className="flex-1 h-[calc(100vh-8rem)]">
         <MapContainer 
-          center={[-15.7801, -47.9292]} // Centro aproximado do Brasil
+          center={centerPosition}
           zoom={4} 
           style={{ height: '100%', width: '100%' }}
         >
@@ -66,7 +69,7 @@ const AdminMapView: React.FC = () => {
           {devices.map(device => (
             <Marker 
               key={device.id} 
-              position={device.position}
+              position={device.position as LatLngExpression}
               icon={markerIcon}
             >
               <Popup>
