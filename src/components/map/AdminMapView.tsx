@@ -6,21 +6,8 @@ import 'leaflet/dist/leaflet.css';
 import LeafletMapWrapper from './LeafletMapWrapper';
 import CustomMarker from './LeafletMarker';
 
-// Correção para o problema de ícones do Leaflet no React
+// Correction for Leaflet icon issues in React
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-
-// Fix para os ícones do Leaflet
-useEffect(() => {
-  // Para corrigir o problema de ícones do Leaflet no React
-  delete L.Icon.Default.prototype._getIconUrl;
-  
-  L.Icon.Default.mergeOptions({
-    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-  });
-}, []);
 
 interface Device {
   id: number;
@@ -31,6 +18,18 @@ interface Device {
 }
 
 const AdminMapView: React.FC = () => {
+  // Fix for Leaflet icons
+  useEffect(() => {
+    // Fix Leaflet icon issues in React
+    delete L.Icon.Default.prototype._getIconUrl;
+    
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+    });
+  }, []);
+
   const [devices, setDevices] = useState<Device[]>([
     { id: 1, name: 'Truck #1', position: [-23.5505, -46.6333], status: 'active', lastUpdate: '2 min atrás' },
     { id: 2, name: 'Van #35', position: [-22.9068, -43.1729], status: 'idle', lastUpdate: '15 min atrás' },
@@ -61,8 +60,10 @@ const AdminMapView: React.FC = () => {
       <div className="flex-1">
         <LeafletMapWrapper center={centerPosition} zoom={4} className="h-full w-full">
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            {...{
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            } as any}
           />
           
           {devices.map(device => (

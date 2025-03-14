@@ -33,7 +33,8 @@ const CustomMarker: React.FC<MarkerProps> = ({ position, children }) => {
   return (
     <Marker 
       position={position} 
-      icon={iconInstance}
+      // Use spread operator with type assertion to fix TypeScript error
+      {...{ icon: iconInstance } as any}
     >
       {children}
     </Marker>
