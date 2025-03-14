@@ -20,8 +20,8 @@ const CompaniesOverview: React.FC<CompaniesOverviewProps> = ({ companies }) => {
 
   const handleAddCompany = () => {
     toast({
-      title: "Feature coming soon",
-      description: "Company registration will be available in the next update.",
+      title: "Funcionalidade em breve",
+      description: "O registro de empresas estará disponível na próxima atualização.",
     });
   };
 
@@ -29,13 +29,13 @@ const CompaniesOverview: React.FC<CompaniesOverviewProps> = ({ companies }) => {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm border p-6">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">Companies Management</h3>
+          <h3 className="text-lg font-semibold">Gerenciamento de Empresas</h3>
           <Button 
             onClick={handleAddCompany} 
             className="flex items-center gap-2"
           >
             <Plus size={16} />
-            <span>Add Company</span>
+            <span>Adicionar Empresa</span>
           </Button>
         </div>
         

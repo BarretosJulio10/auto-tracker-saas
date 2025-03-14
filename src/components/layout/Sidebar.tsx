@@ -67,27 +67,27 @@ const Sidebar: React.FC<SidebarProps> = ({ variant }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const adminLinks = [
-    { to: "/admin", icon: <Gauge size={20} />, title: "Dashboard", exact: true },
-    { to: "/admin/companies", icon: <Users size={20} />, title: "Companies" },
-    { to: "/admin/devices", icon: <Car size={20} />, title: "Devices" },
-    { to: "/admin/map", icon: <Map size={20} />, title: "Map" },
-    { to: "/admin/settings", icon: <Settings size={20} />, title: "Settings" },
+    { to: "/admin", icon: <Gauge size={20} />, title: "Painel", exact: true },
+    { to: "/admin/companies", icon: <Users size={20} />, title: "Empresas" },
+    { to: "/admin/devices", icon: <Car size={20} />, title: "Dispositivos" },
+    { to: "/admin/map", icon: <Map size={20} />, title: "Mapa" },
+    { to: "/admin/settings", icon: <Settings size={20} />, title: "Configurações" },
   ];
 
   const companyLinks = [
-    { to: "/company", icon: <Gauge size={20} />, title: "Dashboard", exact: true },
-    { to: "/company/vehicles", icon: <Car size={20} />, title: "Vehicles" },
-    { to: "/company/clients", icon: <Users size={20} />, title: "Clients" },
-    { to: "/company/map", icon: <Map size={20} />, title: "Map" },
-    { to: "/company/settings", icon: <Settings size={20} />, title: "Settings" },
+    { to: "/company", icon: <Gauge size={20} />, title: "Painel", exact: true },
+    { to: "/company/vehicles", icon: <Car size={20} />, title: "Veículos" },
+    { to: "/company/clients", icon: <Users size={20} />, title: "Clientes" },
+    { to: "/company/map", icon: <Map size={20} />, title: "Mapa" },
+    { to: "/company/settings", icon: <Settings size={20} />, title: "Configurações" },
   ];
 
   const clientLinks = [
-    { to: "/client", icon: <Gauge size={20} />, title: "Dashboard", exact: true },
-    { to: "/client/vehicles", icon: <Car size={20} />, title: "My Vehicles" },
-    { to: "/client/map", icon: <Map size={20} />, title: "Map" },
-    { to: "/client/notifications", icon: <Bell size={20} />, title: "Notifications" },
-    { to: "/client/support", icon: <MessageSquare size={20} />, title: "Support" },
+    { to: "/client", icon: <Gauge size={20} />, title: "Painel", exact: true },
+    { to: "/client/vehicles", icon: <Car size={20} />, title: "Meus Veículos" },
+    { to: "/client/map", icon: <Map size={20} />, title: "Mapa" },
+    { to: "/client/notifications", icon: <Bell size={20} />, title: "Notificações" },
+    { to: "/client/support", icon: <MessageSquare size={20} />, title: "Suporte" },
   ];
 
   const links = 
@@ -116,9 +116,9 @@ const Sidebar: React.FC<SidebarProps> = ({ variant }) => {
             >
               <h1 className="text-lg font-semibold text-white">Auto Track</h1>
               <p className="text-xs text-sidebar-foreground/70">
-                {variant === 'admin' ? 'Admin Panel' : 
-                 variant === 'company' ? 'Company Panel' : 
-                 'Client Panel'}
+                {variant === 'admin' ? 'Painel Admin' : 
+                 variant === 'company' ? 'Painel Empresa' : 
+                 'Painel Cliente'}
               </p>
             </motion.div>
           )}
@@ -160,7 +160,7 @@ const Sidebar: React.FC<SidebarProps> = ({ variant }) => {
               exit={{ opacity: 0, width: 0 }}
               className="whitespace-nowrap overflow-hidden"
             >
-              Sign Out
+              Sair
             </motion.span>
           )}
         </button>

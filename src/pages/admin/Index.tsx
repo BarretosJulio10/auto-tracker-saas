@@ -18,25 +18,25 @@ const AdminDashboard: React.FC = () => {
   const activities = [
     {
       id: '1',
-      title: 'New company registered',
-      description: 'TransportCo Inc. completed registration',
-      time: '2 hours ago',
+      title: 'Nova empresa registrada',
+      description: 'TransportCo Inc. completou o registro',
+      time: '2 horas atrás',
       icon: <Users size={20} className="text-blue-500" />,
       iconBackground: 'bg-blue-100',
     },
     {
       id: '2',
-      title: 'Device offline',
-      description: 'Suntech device SN-5523 disconnected',
-      time: '4 hours ago',
+      title: 'Dispositivo offline',
+      description: 'Dispositivo Suntech SN-5523 desconectado',
+      time: '4 horas atrás',
       icon: <AlertTriangle size={20} className="text-amber-500" />,
       iconBackground: 'bg-amber-100',
     },
     {
       id: '3',
-      title: 'Protocol update',
-      description: 'J16 protocol version updated to v2.3',
-      time: '1 day ago',
+      title: 'Atualização de protocolo',
+      description: 'Protocolo J16 atualizado para a versão v2.3',
+      time: '1 dia atrás',
       icon: <Activity size={20} className="text-green-500" />,
       iconBackground: 'bg-green-100',
     },
@@ -52,8 +52,8 @@ const AdminDashboard: React.FC = () => {
   const handleOpenMap = () => {
     setShowMap(true);
     toast({
-      title: "Map opened",
-      description: "Showing all active tracking devices",
+      title: "Mapa aberto",
+      description: "Mostrando todos os dispositivos de rastreamento ativos",
     });
   };
 
@@ -64,8 +64,8 @@ const AdminDashboard: React.FC = () => {
       <main className="flex-1 ml-[260px]">
         <PageTransition>
           <Header 
-            title="Admin Dashboard" 
-            subtitle="Overview of your tracking system"
+            title="Painel Administrativo" 
+            subtitle="Visão geral do seu sistema de rastreamento"
           />
           
           <div className="p-6">
@@ -73,8 +73,8 @@ const AdminDashboard: React.FC = () => {
             
             <Tabs defaultValue="overview" className="w-full">
               <TabsList className="mb-6">
-                <TabsTrigger value="overview">System Overview</TabsTrigger>
-                <TabsTrigger value="companies">Companies</TabsTrigger>
+                <TabsTrigger value="overview">Visão Geral do Sistema</TabsTrigger>
+                <TabsTrigger value="companies">Empresas</TabsTrigger>
               </TabsList>
               
               <TabsContent value="overview">

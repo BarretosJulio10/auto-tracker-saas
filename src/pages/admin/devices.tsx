@@ -17,7 +17,7 @@ const AdminDevices: React.FC = () => {
       id: 1, 
       name: 'J16-Device-001',
       protocol: 'J16',
-      lastUpdate: '2 min ago',
+      lastUpdate: '2 min atrás',
       status: 'online' as const,
       battery: 85,
       signal: 92,
@@ -27,7 +27,7 @@ const AdminDevices: React.FC = () => {
       id: 2, 
       name: 'EV02-Device-102',
       protocol: 'EV-02',
-      lastUpdate: '5 min ago',
+      lastUpdate: '5 min atrás',
       status: 'idle' as const,
       battery: 45,
       signal: 78,
@@ -37,7 +37,7 @@ const AdminDevices: React.FC = () => {
       id: 3, 
       name: 'ST-Device-203',
       protocol: 'Suntech',
-      lastUpdate: '1 hour ago',
+      lastUpdate: '1 hora atrás',
       status: 'offline' as const,
       battery: 12,
       signal: 0,
@@ -47,8 +47,8 @@ const AdminDevices: React.FC = () => {
 
   const handleAddDevice = () => {
     toast({
-      title: "Add Device",
-      description: "Opening device registration form",
+      title: "Adicionar Dispositivo",
+      description: "Abrindo formulário de registro de dispositivo",
     });
   };
 
@@ -59,15 +59,15 @@ const AdminDevices: React.FC = () => {
       <main className="flex-1 ml-[260px]">
         <PageTransition>
           <Header 
-            title="Devices Management" 
-            subtitle="Monitor and manage your tracking devices"
+            title="Gerenciamento de Dispositivos" 
+            subtitle="Monitore e gerencie seus dispositivos de rastreamento"
           />
           
           <div className="p-6">
             <div className="mb-6">
               <Button onClick={handleAddDevice} className="flex items-center gap-2">
                 <Plus size={16} />
-                <span>Add Device</span>
+                <span>Adicionar Dispositivo</span>
               </Button>
             </div>
 
@@ -82,4 +82,3 @@ const AdminDevices: React.FC = () => {
 };
 
 export default AdminDevices;
-

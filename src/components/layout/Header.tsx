@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
           </div>
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Pesquisar..."
             className="h-10 w-64 pl-10 pr-4 bg-background rounded-lg border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           />
         </div>
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
           <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
             <User size={14} />
           </div>
-          <span className="text-sm font-medium">Profile</span>
+          <span className="text-sm font-medium">Perfil</span>
         </button>
       </div>
     </motion.header>

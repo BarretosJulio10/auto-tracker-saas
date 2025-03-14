@@ -45,7 +45,7 @@ const StatCard: React.FC<StatCardProps> = ({
               )}>
                 {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
               </span>
-              <span className="text-xs text-muted-foreground ml-1">vs last period</span>
+              <span className="text-xs text-muted-foreground ml-1">vs período anterior</span>
             </div>
           )}
         </div>

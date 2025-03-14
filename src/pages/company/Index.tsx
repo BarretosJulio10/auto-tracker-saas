@@ -15,25 +15,25 @@ const CompanyDashboard: React.FC = () => {
   const activities = [
     {
       id: '1',
-      title: 'Vehicle #123 Status Alert',
-      description: 'Speed exceeded 100 km/h in restricted zone',
-      time: '30 minutes ago',
+      title: 'Alerta de Status do Veículo #123',
+      description: 'Velocidade excedeu 100 km/h em zona restrita',
+      time: '30 minutos atrás',
       icon: <Car size={20} className="text-red-500" />,
       iconBackground: 'bg-red-100',
     },
     {
       id: '2',
-      title: 'New client added',
-      description: 'Client ABC Logistics was added to your account',
-      time: '2 hours ago',
+      title: 'Novo cliente adicionado',
+      description: 'Cliente ABC Logística foi adicionado à sua conta',
+      time: '2 horas atrás',
       icon: <Users size={20} className="text-blue-500" />,
       iconBackground: 'bg-blue-100',
     },
     {
       id: '3',
-      title: 'Device maintenance',
-      description: 'EV-02 device #45 is due for maintenance',
-      time: '1 day ago',
+      title: 'Manutenção de dispositivo',
+      description: 'Dispositivo EV-02 #45 está com manutenção agendada',
+      time: '1 dia atrás',
       icon: <Activity size={20} className="text-amber-500" />,
       iconBackground: 'bg-amber-100',
     },
@@ -46,32 +46,32 @@ const CompanyDashboard: React.FC = () => {
       <main className="flex-1 ml-[260px]">
         <PageTransition>
           <Header 
-            title="Company Dashboard" 
+            title="Painel da Empresa" 
             subtitle="TransportCo Inc."
           />
           
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <StatCard 
-                title="Total Vehicles" 
+                title="Total de Veículos" 
                 value="48" 
                 icon={<Car size={24} />}
                 trend={{ value: 5, isPositive: true }}
               />
               <StatCard 
-                title="Active Clients" 
+                title="Clientes Ativos" 
                 value="12" 
                 icon={<Users size={24} />}
                 trend={{ value: 2, isPositive: true }}
               />
               <StatCard 
-                title="Routes Today" 
+                title="Rotas Hoje" 
                 value="28" 
                 icon={<MapPin size={24} />}
                 trend={{ value: 10, isPositive: true }}
               />
               <StatCard 
-                title="Avg. Trip Time" 
+                title="Tempo Médio de Viagem" 
                 value="2.5h" 
                 icon={<Clock size={24} />}
                 trend={{ value: 15, isPositive: false }}
@@ -81,40 +81,40 @@ const CompanyDashboard: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 bg-white rounded-lg p-6 shadow-sm border">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold">Fleet Status</h3>
+                  <h3 className="text-lg font-semibold">Status da Frota</h3>
                   <button 
                     onClick={() => setShowMap(true)}
                     className="px-4 py-2 bg-primary text-white rounded-md flex items-center gap-2 hover:bg-primary/90 transition-colors"
                   >
                     <MapPin size={18} />
-                    <span>View Map</span>
+                    <span>Ver Mapa</span>
                   </button>
                 </div>
                 
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-sm font-medium text-muted-foreground mb-2">Vehicle Status</h4>
+                    <h4 className="text-sm font-medium text-muted-foreground mb-2">Status dos Veículos</h4>
                     <div className="h-8 bg-gray-100 rounded-full overflow-hidden flex">
                       <div className="h-full bg-green-500 w-[65%] relative">
                         <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-white">
-                          Moving (65%)
+                          Em movimento (65%)
                         </span>
                       </div>
                       <div className="h-full bg-amber-500 w-[25%] relative">
                         <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-white">
-                          Idle (25%)
+                          Parado (25%)
                         </span>
                       </div>
                       <div className="h-full bg-gray-500 w-[10%] relative">
                         <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-white">
-                          Stopped (10%)
+                          Desligado (10%)
                         </span>
                       </div>
                     </div>
                   </div>
                   
                   <div>
-                    <h4 className="text-sm font-medium text-muted-foreground mb-2">Top Routes</h4>
+                    <h4 className="text-sm font-medium text-muted-foreground mb-2">Principais Rotas</h4>
                     <div className="space-y-2">
                       {[
                         { route: 'São Paulo → Rio de Janeiro', count: 14, color: 'bg-blue-500' },
@@ -148,7 +148,7 @@ const CompanyDashboard: React.FC = () => {
       
       {showMap && (
         <MapView 
-          title="Fleet Location"
+          title="Localização da Frota"
           onClose={() => setShowMap(false)} 
         />
       )}

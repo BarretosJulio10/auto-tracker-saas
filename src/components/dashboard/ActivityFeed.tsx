@@ -18,7 +18,7 @@ interface ActivityFeedProps {
 const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">Recent Activity</h3>
+      <h3 className="text-lg font-semibold">Atividades Recentes</h3>
       
       <div className="space-y-4">
         {activities.map((activity, i) => (
