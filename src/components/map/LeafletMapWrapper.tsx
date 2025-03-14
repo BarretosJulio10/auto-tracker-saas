@@ -35,8 +35,9 @@ const LeafletMapWrapper: React.FC<LeafletMapWrapperProps> = ({
     <div className={className}>
       <MapContainer 
         className="h-full w-full"
-        // We no longer pass center and zoom directly to MapContainer
-        // They will be handled by the MapController
+        // We need to provide initial values for center and zoom
+        center={center}
+        zoom={zoom}
       >
         <MapController center={center} zoom={zoom} />
         {children}
