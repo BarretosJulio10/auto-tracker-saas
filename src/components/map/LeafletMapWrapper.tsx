@@ -35,9 +35,9 @@ const LeafletMapWrapper: React.FC<LeafletMapWrapperProps> = ({
     <div className={className} style={{ height: '100%', width: '100%' }}>
       <MapContainer 
         className="h-full w-full"
-        center={center as any}
-        zoom={zoom as any}
         style={{ height: '100%', width: '100%' }}
+        // Fix TypeScript error by passing props in a valid way for react-leaflet
+        {...{center, zoom} as any}
       >
         <MapController center={center} zoom={zoom} />
         {children}

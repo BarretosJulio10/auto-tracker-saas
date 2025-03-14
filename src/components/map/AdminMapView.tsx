@@ -60,8 +60,11 @@ const AdminMapView: React.FC = () => {
       <div className="flex-1" style={{ height: 'calc(100% - 80px)' }}>
         <LeafletMapWrapper center={centerPosition} zoom={4} className="h-full w-full">
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            // Fix TypeScript error by passing props in a valid way for react-leaflet
+            {...{
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            } as any}
           />
           
           {devices.map(device => (

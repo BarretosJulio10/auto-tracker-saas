@@ -33,7 +33,8 @@ const CustomMarker: React.FC<MarkerProps> = ({ position, children }) => {
   return (
     <Marker 
       position={position} 
-      icon={iconInstance as any}
+      // Fix TypeScript error by using type casting
+      {...{icon: iconInstance}}
     >
       {children}
     </Marker>
