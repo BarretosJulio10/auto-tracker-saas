@@ -56,20 +56,25 @@ const AdminMapView: React.FC = () => {
       </div>
       
       <div className="flex-1 h-[calc(100vh-8rem)]">
+        {/* 
+          Using a key instead of worrying about props order to force remount 
+          which helps with some leaflet initialization issues 
+        */}
         <MapContainer 
+          key="map-container"
           style={{ height: '100%', width: '100%' }}
-          center={centerPosition}
           zoom={4}
+          center={centerPosition}
         >
           <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
           {devices.map(device => (
             <Marker 
               key={device.id} 
-              position={device.position as LatLngExpression}
+              position={device.position}
               icon={markerIcon}
             >
               <Popup>
