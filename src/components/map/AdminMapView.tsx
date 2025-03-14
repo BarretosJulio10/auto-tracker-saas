@@ -1,13 +1,10 @@
 
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Icon, LatLngExpression } from 'leaflet';
+import { TileLayer, Popup } from 'react-leaflet';
+import { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
-// Correção para os ícones do Leaflet no React
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+import LeafletMapWrapper from './LeafletMapWrapper';
+import CustomMarker from './LeafletMarker';
 
 interface Device {
   id: number;
@@ -26,16 +23,6 @@ const AdminMapView: React.FC = () => {
     { id: 5, name: 'Van #12', position: [-12.9716, -38.5016], status: 'active', lastUpdate: '7 min atrás' },
     { id: 6, name: 'Car #23', position: [-27.5945, -48.5477], status: 'idle', lastUpdate: '20 min atrás' },
   ]);
-
-  const markerIcon = new Icon({
-    iconUrl,
-    iconRetinaUrl,
-    shadowUrl,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
   
   const getStatusColor = (status: string) => {
     switch(status) {
@@ -56,26 +43,16 @@ const AdminMapView: React.FC = () => {
       </div>
       
       <div className="flex-1 h-[calc(100vh-8rem)]">
-        {/* 
-          Using a key instead of worrying about props order to force remount 
-          which helps with some leaflet initialization issues 
-        */}
-        <MapContainer 
-          key="map-container"
-          style={{ height: '100%', width: '100%' }}
-          zoom={4}
-          center={centerPosition}
-        >
+        <LeafletMapWrapper center={centerPosition} zoom={4}>
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           
           {devices.map(device => (
-            <Marker 
+            <CustomMarker 
               key={device.id} 
               position={device.position}
-              icon={markerIcon}
             >
               <Popup>
                 <div className="p-1">
@@ -89,9 +66,9 @@ const AdminMapView: React.FC = () => {
                   </div>
                 </div>
               </Popup>
-            </Marker>
+            </CustomMarker>
           ))}
-        </MapContainer>
+        </LeafletMapWrapper>
       </div>
     </div>
   );
