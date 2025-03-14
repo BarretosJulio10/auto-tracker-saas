@@ -35,8 +35,10 @@ const LeafletMapWrapper: React.FC<LeafletMapWrapperProps> = ({
     <div className={className}>
       <MapContainer 
         className="h-full w-full"
-        // Use proper typecasting for MapContainer props
-        {...{center, zoom} as any}
+        // Use proper approach to pass props to MapContainer
+        center={center}
+        zoom={zoom}
+        style={{ height: '100%', width: '100%' }}
       >
         <MapController center={center} zoom={zoom} />
         {children}

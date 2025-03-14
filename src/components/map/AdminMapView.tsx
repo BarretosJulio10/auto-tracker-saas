@@ -1,10 +1,26 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TileLayer, Popup } from 'react-leaflet';
 import { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import LeafletMapWrapper from './LeafletMapWrapper';
 import CustomMarker from './LeafletMarker';
+
+// Correção para o problema de ícones do Leaflet no React
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+// Fix para os ícones do Leaflet
+useEffect(() => {
+  // Para corrigir o problema de ícones do Leaflet no React
+  delete L.Icon.Default.prototype._getIconUrl;
+  
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  });
+}, []);
 
 interface Device {
   id: number;
@@ -42,9 +58,10 @@ const AdminMapView: React.FC = () => {
         <p className="text-sm text-muted-foreground">Visualize a localização de todos os dispositivos</p>
       </div>
       
-      <div className="flex-1 h-[calc(100vh-8rem)]">
-        <LeafletMapWrapper center={centerPosition} zoom={4}>
+      <div className="flex-1">
+        <LeafletMapWrapper center={centerPosition} zoom={4} className="h-full w-full">
           <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           

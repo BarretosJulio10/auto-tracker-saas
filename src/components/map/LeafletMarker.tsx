@@ -33,8 +33,7 @@ const CustomMarker: React.FC<MarkerProps> = ({ position, children }) => {
   return (
     <Marker 
       position={position} 
-      // Use a proper approach to pass the icon prop
-      {...{icon: iconInstance} as any}
+      icon={iconInstance}
     >
       {children}
     </Marker>
