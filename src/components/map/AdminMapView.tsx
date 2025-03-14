@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, MapContainerProps } from 'react-leaflet';
 import { Icon, LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -47,6 +47,13 @@ const AdminMapView: React.FC = () => {
 
   // Define center as LatLngExpression to fix type issues
   const centerPosition: LatLngExpression = [-15.7801, -47.9292];
+  
+  // Define map props explicitly with correct types
+  const mapProps: MapContainerProps = {
+    center: centerPosition,
+    zoom: 4,
+    style: { height: '100%', width: '100%' }
+  };
 
   return (
     <div className="h-full w-full flex flex-col">
@@ -57,9 +64,7 @@ const AdminMapView: React.FC = () => {
       
       <div className="flex-1 h-[calc(100vh-8rem)]">
         <MapContainer 
-          center={centerPosition}
-          zoom={4} 
-          style={{ height: '100%', width: '100%' }}
+          {...mapProps}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

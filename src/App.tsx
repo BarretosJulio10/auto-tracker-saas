@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 // Admin Panel
 import AdminDashboard from "./pages/admin/Index";
 import AdminDevices from "./pages/admin/devices";
+import AdminMapPage from "./pages/admin/map";
 
 // Company Panel
 import CompanyDashboard from "./pages/company/Index";
@@ -34,6 +36,7 @@ const App = () => (
             {/* Admin Panel Routes */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/devices" element={<AdminDevices />} />
+            <Route path="/admin/map" element={<AdminMapPage />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
             
             {/* Company Panel Routes */}
