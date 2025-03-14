@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Marker as LeafletMarker, Popup } from 'react-leaflet';
+import { Marker, Popup } from 'react-leaflet';
 import { Icon, LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -31,9 +31,9 @@ const CustomMarker: React.FC<MarkerProps> = ({ position, children }) => {
   const iconInstance = React.useMemo(() => defaultIcon, []);
 
   return (
-    <LeafletMarker position={position} icon={iconInstance}>
+    <Marker position={position} icon={iconInstance}>
       {children}
-    </LeafletMarker>
+    </Marker>
   );
 };
 
