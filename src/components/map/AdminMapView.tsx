@@ -58,8 +58,8 @@ const AdminMapView: React.FC = () => {
       <div className="flex-1 h-[calc(100vh-8rem)]">
         <MapContainer 
           style={{ height: '100%', width: '100%' }}
-          zoom={4}
           center={centerPosition}
+          zoom={4}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
