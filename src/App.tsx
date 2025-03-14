@@ -20,6 +20,9 @@ import ClientDashboard from "./pages/client/Index";
 // Not Found Page
 import NotFound from "./pages/NotFound";
 
+// Panel Switcher Component
+import PanelSwitcher from "./components/layout/PanelSwitcher";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -51,6 +54,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
+        <PanelSwitcher />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
