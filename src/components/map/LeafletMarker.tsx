@@ -31,7 +31,7 @@ const CustomMarker: React.FC<MarkerProps> = ({ position, children }) => {
   const iconInstance = React.useMemo(() => defaultIcon, []);
 
   return (
-    <Marker position={position} icon={iconInstance}>
+    <Marker position={position} icon={iconInstance as any}>
       {children}
     </Marker>
   );

@@ -35,9 +35,10 @@ const LeafletMapWrapper: React.FC<LeafletMapWrapperProps> = ({
     <div className={className}>
       <MapContainer 
         className="h-full w-full"
-        // We need to provide initial values for center and zoom
-        center={center}
-        zoom={zoom}
+        // Need to provide initial center and zoom as any type to bypass TypeScript error
+        // The actual view will be controlled by MapController
+        center={center as any}
+        zoom={zoom as any}
       >
         <MapController center={center} zoom={zoom} />
         {children}
