@@ -27,7 +27,7 @@ interface MarkerProps {
 
 // This component creates a marker with the default icon
 const CustomMarker: React.FC<MarkerProps> = ({ position, children }) => {
-  // Use the useRef hook to create a mutable object that will hold our icon
+  // Use the useMemo hook to create a mutable object that will hold our icon
   const iconInstance = React.useMemo(() => defaultIcon, []);
 
   return (
