@@ -12,7 +12,12 @@ import {
   Settings, 
   Bell, 
   MessageSquare, 
-  LogOut
+  LogOut,
+  Building,
+  Briefcase,
+  LineChart,
+  FileText,
+  UserPlus
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -75,9 +80,12 @@ const Sidebar: React.FC<SidebarProps> = ({ variant }) => {
   ];
 
   const companyLinks = [
-    { to: "/company", icon: <Gauge size={20} />, title: "Painel", exact: true },
+    { to: "/company", icon: <Gauge size={20} />, title: "Dashboard", exact: true },
     { to: "/company/vehicles", icon: <Car size={20} />, title: "Veículos" },
     { to: "/company/clients", icon: <Users size={20} />, title: "Clientes" },
+    { to: "/company/employees", icon: <UserPlus size={20} />, title: "Funcionários" },
+    { to: "/company/reports", icon: <FileText size={20} />, title: "Relatórios" },
+    { to: "/company/analytics", icon: <LineChart size={20} />, title: "Análises" },
     { to: "/company/map", icon: <Map size={20} />, title: "Mapa" },
     { to: "/company/settings", icon: <Settings size={20} />, title: "Configurações" },
   ];
@@ -105,7 +113,7 @@ const Sidebar: React.FC<SidebarProps> = ({ variant }) => {
       <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
         <div className="flex items-center">
           <div className="w-10 h-10 rounded-full bg-sidebar-primary flex items-center justify-center flex-shrink-0 text-white font-bold text-xl">
-            AT
+            {variant === 'admin' ? 'AT' : variant === 'company' ? 'EM' : 'CL'}
           </div>
           {!collapsed && (
             <motion.div
