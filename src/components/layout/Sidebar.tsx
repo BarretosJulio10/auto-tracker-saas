@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -73,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ variant }) => {
 
   const adminLinks = [
     { to: "/admin", icon: <Gauge size={20} />, title: "Painel", exact: true },
-    { to: "/admin/companies", icon: <Users size={20} />, title: "Empresas" },
+    { to: "/admin/companies", icon: <Building size={20} />, title: "Empresas" },
     { to: "/admin/devices", icon: <Car size={20} />, title: "Dispositivos" },
     { to: "/admin/map", icon: <Map size={20} />, title: "Mapa" },
     { to: "/admin/settings", icon: <Settings size={20} />, title: "Configurações" },

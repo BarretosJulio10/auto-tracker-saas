@@ -10,6 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import AdminDashboard from "./pages/admin/Index";
 import AdminDevices from "./pages/admin/devices";
 import AdminMapPage from "./pages/admin/map";
+import AdminCompaniesPage from "./pages/admin/companies";
 
 // Company Panel
 import CompanyDashboard from "./pages/company/Index";
@@ -38,6 +39,7 @@ const App = () => (
             
             {/* Admin Panel Routes */}
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/companies" element={<AdminCompaniesPage />} />
             <Route path="/admin/devices" element={<AdminDevices />} />
             <Route path="/admin/map" element={<AdminMapPage />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
