@@ -1,14 +1,21 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Layers, X, MapPin, ChevronDown, Filter } from 'lucide-react';
+import { TileLayer, Popup } from 'react-leaflet';
+import { LatLngExpression } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import LeafletMapWrapper from './LeafletMapWrapper';
+import CustomMarker from './LeafletMarker';
 
-const DUMMY_VEHICLES = [
-  { id: 1, name: 'Truck #1', status: 'active', location: 'São Paulo, BR', lastUpdate: '2 min ago' },
-  { id: 2, name: 'Van #35', status: 'idle', location: 'Rio de Janeiro, BR', lastUpdate: '15 min ago' },
-  { id: 3, name: 'Car #52', status: 'offline', location: 'Belo Horizonte, BR', lastUpdate: '1 hr ago' },
-  { id: 4, name: 'Truck #7', status: 'active', location: 'Curitiba, BR', lastUpdate: '5 min ago' },
-];
+interface Vehicle {
+  id: number;
+  name: string;
+  status: 'active' | 'idle' | 'offline';
+  location: string;
+  position: [number, number]; // [latitude, longitude]
+  lastUpdate: string;
+}
 
 interface MapViewProps {
   title?: string;
@@ -16,26 +23,45 @@ interface MapViewProps {
 }
 
 const MapView: React.FC<MapViewProps> = ({ title = 'Map View', onClose }) => {
-  const [vehicles, setVehicles] = useState(DUMMY_VEHICLES);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([
+    { id: 1, name: 'Truck #1', status: 'active', location: 'São Paulo, BR', position: [-23.5505, -46.6333], lastUpdate: '2 min ago' },
+    { id: 2, name: 'Van #35', status: 'idle', location: 'Rio de Janeiro, BR', position: [-22.9068, -43.1729], lastUpdate: '15 min ago' },
+    { id: 3, name: 'Car #52', status: 'offline', location: 'Belo Horizonte, BR', position: [-19.9167, -43.9345], lastUpdate: '1 hr ago' },
+    { id: 4, name: 'Truck #7', status: 'active', location: 'Curitiba, BR', position: [-25.4284, -49.2733], lastUpdate: '5 min ago' },
+    { id: 5, name: 'Van #12', status: 'active', location: 'Salvador, BR', position: [-12.9716, -38.5016], lastUpdate: '7 min ago' },
+    { id: 6, name: 'Car #23', status: 'idle', location: 'Florianópolis, BR', position: [-27.5945, -48.5477], lastUpdate: '20 min ago' },
+  ]);
+  
   const [showVehicleList, setShowVehicleList] = useState(true);
+  const [selectedVehicle, setSelectedVehicle] = useState<number | null>(null);
   
-  const mapRef = useRef<HTMLDivElement>(null);
+  // Define center position as the center of Brazil
+  const centerPosition: LatLngExpression = [-15.7801, -47.9292];
   
-  // Simulate map loading
-  useEffect(() => {
-    if (mapRef.current) {
-      // In a real implementation, this would initialize a map library like Google Maps, Leaflet, etc.
-      const mapElement = mapRef.current;
-      mapElement.innerHTML = `
-        <div class="w-full h-full flex items-center justify-center bg-slate-100">
-          <div class="text-center">
-            <p class="text-lg font-medium mb-2">Interactive Map</p>
-            <p class="text-sm text-muted-foreground">Real map integration would go here</p>
-          </div>
-        </div>
-      `;
+  const getStatusColor = (status: string) => {
+    switch(status) {
+      case 'active': return 'bg-green-100 text-green-800';
+      case 'idle': return 'bg-amber-100 text-amber-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
-  }, []);
+  };
+  
+  const getStatusText = (status: string) => {
+    switch(status) {
+      case 'active': return 'ativo';
+      case 'idle': return 'parado';
+      default: return 'offline';
+    }
+  };
+  
+  const handleVehicleClick = (id: number) => {
+    setSelectedVehicle(id);
+    const vehicle = vehicles.find(v => v.id === id);
+    if (vehicle) {
+      // This would pan the map to the vehicle in a full implementation
+      console.log(`Panning to vehicle ${id} at position ${vehicle.position}`);
+    }
+  };
   
   return (
     <motion.div 
@@ -73,7 +99,34 @@ const MapView: React.FC<MapViewProps> = ({ title = 'Map View', onClose }) => {
       <div className="flex-1 flex relative">
         {/* Map container */}
         <div className="flex-1 relative">
-          <div ref={mapRef} className="absolute inset-0"></div>
+          <LeafletMapWrapper center={centerPosition} zoom={4} className="h-full w-full">
+            <TileLayer
+              {...{
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              } as any}
+            />
+            
+            {vehicles.map(vehicle => (
+              <CustomMarker 
+                key={vehicle.id} 
+                position={vehicle.position}
+              >
+                <Popup>
+                  <div className="p-1">
+                    <h3 className="font-medium">{vehicle.name}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${getStatusColor(vehicle.status)}`}>
+                        {getStatusText(vehicle.status)}
+                      </span>
+                      <span className="text-xs text-gray-500">{vehicle.lastUpdate}</span>
+                    </div>
+                    <p className="text-xs mt-1">{vehicle.location}</p>
+                  </div>
+                </Popup>
+              </CustomMarker>
+            ))}
+          </LeafletMapWrapper>
         </div>
         
         {/* Sidebar with vehicle list */}
@@ -97,24 +150,25 @@ const MapView: React.FC<MapViewProps> = ({ title = 'Map View', onClose }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex-1 p-4 overflow-y-auto"
+              className="flex-1 overflow-hidden"
             >
-              <h3 className="font-medium mb-3">Vehicles</h3>
+              <div className="p-4 border-b">
+                <h3 className="font-medium">Vehicles</h3>
+              </div>
               
-              <div className="space-y-2">
+              <div className="overflow-y-auto h-[calc(100%-56px)]">
                 {vehicles.map(vehicle => (
                   <div 
                     key={vehicle.id}
-                    className="p-3 border rounded-lg hover:bg-muted/50 cursor-pointer transition-colors"
+                    onClick={() => handleVehicleClick(vehicle.id)}
+                    className={`p-3 border-b hover:bg-muted/50 cursor-pointer transition-colors ${
+                      selectedVehicle === vehicle.id ? 'bg-muted/50' : ''
+                    }`}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <h4 className="font-medium">{vehicle.name}</h4>
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        vehicle.status === 'active' ? 'bg-green-100 text-green-800' : 
-                        vehicle.status === 'idle' ? 'bg-amber-100 text-amber-800' : 
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {vehicle.status}
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${getStatusColor(vehicle.status)}`}>
+                        {getStatusText(vehicle.status)}
                       </span>
                     </div>
                     

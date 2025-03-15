@@ -57,7 +57,7 @@ const AdminMapView: React.FC = () => {
         <p className="text-sm text-muted-foreground">Visualize a localização de todos os dispositivos</p>
       </div>
       
-      <div className="flex-1" style={{ height: 'calc(100% - 80px)' }}>
+      <div className="flex-1">
         <LeafletMapWrapper center={centerPosition} zoom={4} className="h-full w-full">
           <TileLayer
             // Fix TypeScript error by passing props in a valid way for react-leaflet
