@@ -48,7 +48,7 @@ const AdminCompaniesPage = () => {
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar variant="admin" />
-      <div className="flex-1">
+      <div className="flex-1 ml-[260px]"> {/* Added margin to prevent sidebar overlap */}
         <Header title="Empresas" subtitle="Gerenciamento de empresas cadastradas" />
         
         <PageTransition>
